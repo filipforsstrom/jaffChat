@@ -1,4 +1,4 @@
-namespace jaffChat.Shared
+namespace JaffChat.Shared
 {
     public class WeatherForecast
     {

@@ -1,10 +1,8 @@
-using jaffChat.Shared;
-using Microsoft.AspNetCore.Authorization;
+using JaffChat.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace jaffChat.Server.Controllers
+namespace JaffChat.Server.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
