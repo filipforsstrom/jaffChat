@@ -1,0 +1,46 @@
+﻿@page "/account/register"
+@using JaffChat.Client.Account.Contracts;
+@using JaffChat.Client.Account.Models;
+@inject NavigationManager NavigationManager
+@inject IIdentityService IdentityService
+
+<div class="card">
+    <h4 class="card-header">Register</h4>
+    <div class="card-body">
+        
+        <EditForm Model="@register" OnValidSubmit="@HandleSubmit">
+            <DataAnnotationsValidator/>
+            <div class="form-group">
+                <label>Email</label>
+                <InputText @bind-Value="register.Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <InputText @bind-Value="register.Username" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <InputText @bind-Value="register.Password" type="password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Validate Password</label>
+                <InputText @bind-Value="register.ValidatePassword" type="password" class="form-control" />
+            </div>
+            <button class="btn btn-primary">
+                Register
+            </button>
+            <NavLink href="account/login" class="btn btn-link">Cancel</NavLink>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private RegisterDto register = new RegisterDto();
+
+
+    private async Task HandleSubmit()
+    {
+        var response = await IdentityService.Register(register);
+
+    }
+}

@@ -11,6 +11,8 @@ namespace JaffChat.Server.Identity.Controller
         {
 
         }
+        [HttpPost]
+        [Route("[action]")]
         public async Task<IActionResult> Register()
         {
 

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JaffChat.Client.Models.Account
+namespace JaffChat.Client.Account.Models
 {
-    public class AddUser
+    public class RegisterDto
     {
         [Required]
         public string Email { get; set; }
@@ -13,5 +13,9 @@ namespace JaffChat.Client.Models.Account
         [Required]
         [MinLength(6, ErrorMessage = "The Password field must be a minimum of 6 characters")]
         public string Password { get; set; }
+
+        [Required]
+        [Compare(nameof(Password), ErrorMessage = "Password do not match")]
+        public string ValidatePassword { get; set; }
     }
 }
