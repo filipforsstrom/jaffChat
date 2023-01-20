@@ -1,0 +1,64 @@
+﻿<div>
+    <div>
+        <h3>Add User to chat</h3>
+        <EditForm OnValidSubmit="handleSearchSubmit">
+            <InputText />
+            <button>
+                Add
+            </button>
+        </EditForm>
+    </div>
+    <div>
+        @(ErrorMessage != null ? ErrorMessage : null)
+    </div>
+    <div>
+        <h3>Participants</h3>
+        <div>
+            @if (ChatParticipants != null || ChatParticipants?.Count < 1)
+            {
+                @foreach (var participant in ChatParticipants)
+                {
+                    <p>@participant.Username</p>
+                }
+            } else
+            {
+                <p>No users added =(</p>
+            }
+        </div>
+        <button onclick="onCreateChatClick">Create Chat</button>
+    </div>
+</div>
+
+@code {
+    List<ChatParticipant>? ChatParticipants { get; set;  }
+    string ErrorMessage { get; set; }
+
+    private async Task OnInitializedAsync()
+    {
+        ChatParticipants = new();
+    }
+
+    public async Task handleSearchSubmit()
+    {
+        //om antalet användare är fler än 5, tillåt ej. Skicka meddelande.
+        if (ChatParticipants?.Count > 5)
+        {
+            // sätt en timeout
+            ErrorMessage = "Maximum 5 participants.";
+        }
+        //skicka förfrågan till api
+        //navigera till chat
+        //eller ge felmeddelande
+    }
+
+    public async Task onCreateChatClick()
+    {
+        
+    }
+
+    public class ChatParticipant
+    {
+        public string? UserId { get; set; }
+        public string? Username { get; set; }
+    }
+}
