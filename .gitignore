@@ -363,6 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 .idea/
+
 *.db
 *.db-shm
 *.db-wal
