@@ -35,5 +35,21 @@ namespace JaffChat.Client.Account.Services
             return registerResponse;
 
         }
+        public async Task<RegisterResponse> Login(LoginDto loginDto)
+        {
+            RegisterResponse registerResponse= new();
+
+            var response = await _httpClient.PostAsJsonAsync("api/Identity/Login", loginDto);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                registerResponse.Data = await response.Content.ReadAsStringAsync();
+                return registerResponse;
+            }
+            registerResponse.Success = true;
+            return registerResponse;
+            
+        }
+
     }
 }

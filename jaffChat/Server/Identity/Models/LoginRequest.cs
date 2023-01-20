@@ -1,13 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JaffChat.Client.Account.Models
+namespace JaffChat.Server.Identity.Models
 {
-    public class LoginDto
+    public class LoginRequest
     {
-        [Required]
         public string Email { get; set; }
 
-        [Required]
         public string Password { get; set; }
     }
 }

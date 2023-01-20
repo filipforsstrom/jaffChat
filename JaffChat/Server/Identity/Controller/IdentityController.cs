@@ -1,7 +1,9 @@
 ﻿using JaffChat.Server.Identity.Models;
+//using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace JaffChat.Server.Identity.Controller
 {
@@ -15,6 +17,7 @@ namespace JaffChat.Server.Identity.Controller
         {
             _signInManager = signInManager;
         }
+
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> Register(RegisterRequest request)
@@ -42,6 +45,25 @@ namespace JaffChat.Server.Identity.Controller
                 return StatusCode(StatusCodes.Status500InternalServerError, "Server error");
             }
             
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> Login(LoginRequest login)
+        {
+            var user = await _signInManager.UserManager.Users.FirstOrDefaultAsync(u => u.Email == login.Email);
+
+            var result = await _signInManager.UserManager.CheckPasswordAsync(user, login.Password);
+
+            if (!result)
+            {
+                return Unauthorized("Wrong password");
+
+            }
+
+            return Ok("Välkommen");
+
+
         }
     }
 }
