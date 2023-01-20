@@ -4,7 +4,7 @@ namespace JaffChat.Client.Account.Contracts
 {
     public interface IIdentityService
     {
-        Task<RegisterResponse> Register(RegisterDto register);
+        Task<RegisterResponse> Register(RegisterForm register);
 
     }
 }

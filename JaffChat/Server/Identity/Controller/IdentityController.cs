@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using JaffChat.Server.Identity.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JaffChat.Server.Identity.Controller
@@ -7,17 +9,39 @@ namespace JaffChat.Server.Identity.Controller
     [ApiController]
     public class IdentityController : ControllerBase
     {
-        public IdentityController()
-        {
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
+        public IdentityController(SignInManager<ApplicationUser> signInManager)
+        {
+            _signInManager = signInManager;
         }
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> Register()
+        public async Task<IActionResult> Register(RegisterRequest request)
         {
+            ApplicationUser newUser = new()
+            {
+                Email = request.Email,
+                UserName = request.Username,
+                NickName = request.Username
+            };
 
+            try
+            {
+                var registerResult = await _signInManager.UserManager.CreateAsync(newUser, request.Password);
 
-            return null;
+                if (registerResult.Succeeded)
+                {
+                    return StatusCode(StatusCodes.Status201Created);
+                }
+
+                return BadRequest(registerResult.Errors);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Server error");
+            }
+            
         }
     }
 }

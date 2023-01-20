@@ -12,10 +12,18 @@ namespace JaffChat.Client.Account.Services
         {
             _httpClient = httpClient;
         }
-        public async Task<RegisterResponse> Register(RegisterDto register)
+        public async Task<RegisterResponse> Register(RegisterForm register)
         {
             RegisterResponse registerResponse = new();
-            var response = await _httpClient.PostAsJsonAsync("api/Identity/Register", register);
+
+            RegisterDto registerRequest = new RegisterDto()
+            {
+                Email = register.Email,
+                Password = register.Password,
+                Username = register.Username,
+            };
+
+            var response = await _httpClient.PostAsJsonAsync("api/Identity/Register", registerRequest);
 
             if(!response.IsSuccessStatusCode)
             {

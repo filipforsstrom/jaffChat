@@ -1,16 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JaffChat.Client.Account.Models
+namespace JaffChat.Server.Identity.Models
 {
-    public class RegisterDto
+    public class RegisterRequest
     {
         public string Email { get; set; }
 
         public string Username { get; set; }
 
-        
         public string Password { get; set; }
-
-        
     }
 }

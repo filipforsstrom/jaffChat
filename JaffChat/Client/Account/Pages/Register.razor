@@ -10,6 +10,7 @@
         
         <EditForm Model="@register" OnValidSubmit="@HandleSubmit">
             <DataAnnotationsValidator/>
+            <ValidationSummary/>
             <div class="form-group">
                 <label>Email</label>
                 <InputText @bind-Value="register.Email" class="form-control" />
@@ -26,7 +27,7 @@
                 <label>Validate Password</label>
                 <InputText @bind-Value="register.ValidatePassword" type="password" class="form-control" />
             </div>
-            <button class="btn btn-primary">
+            <button class="btn btn-primary mt-2">
                 Register
             </button>
             <NavLink href="account/login" class="btn btn-link">Cancel</NavLink>
@@ -35,7 +36,7 @@
 </div>
 
 @code {
-    private RegisterDto register = new RegisterDto();
+    private RegisterForm register = new();
 
 
     private async Task HandleSubmit()
