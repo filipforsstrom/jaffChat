@@ -364,6 +364,10 @@ FodyWeavers.xsd
 
 .idea/
 
-.sqlite-wal
-.sqlite
-.sqlite-shm
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+.vscode/
