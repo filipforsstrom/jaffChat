@@ -2,7 +2,7 @@
 
 namespace JaffChat.Client.Account.Models
 {
-    public class Login
+    public class LoginDto
     {
         [Required]
         public string Username { get; set; }
