@@ -371,3 +371,4 @@ FodyWeavers.xsd
 *.sqlite-shm
 *.sqlite-wal
 .vscode/
+**/.DS_Store
